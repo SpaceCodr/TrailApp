@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:trailapp/our_models.dart';
 
 final _auth = FirebaseAuth.instance;
+class TaskAddPageArgs {
+  Task task;
+  TaskAddPageArgs({required Task task}) : task= task;
+}
 class TasksPage extends StatelessWidget {
+  const TasksPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        floatingActionButton: Container(
+    return Scaffold(
+        floatingActionButton: SizedBox(
           height: 55,
           width: 55,
           child: FloatingActionButton(
             backgroundColor: Colors.black,
-            child: Text(
+            child: const Text(
               '+',
               style: TextStyle(
                 fontSize: 30,
@@ -20,7 +27,7 @@ class TasksPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddTasks()),
+                MaterialPageRoute(builder: (context) => const AddTasks()),
               );
             },
           ),
@@ -28,7 +35,7 @@ class TasksPage extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
+          title: const Text(
             'MY TASKS',
             style: TextStyle(
               fontFamily: 'Titlefont6',
@@ -46,7 +53,7 @@ class TasksPage extends StatelessWidget {
                 _auth.signOut();
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.logout_outlined,size: 30,),
+              icon: const Icon(Icons.logout_outlined,size: 30,),
 
             ),
           ],
@@ -54,7 +61,7 @@ class TasksPage extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Container(
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/full-bloom.png'),
             fit: BoxFit.cover,
@@ -62,34 +69,33 @@ class TasksPage extends StatelessWidget {
           ),
         child :Center(
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: ListView(
-                children: <Widget>[
+                children: const <Widget>[
                   SizedBox(height: 20),
-                  Container(
-                      child: Text(
-                        'Add Task!',
-                        style: TextStyle(
-                          fontFamily: 'VT323',
-                          color: Colors.white,
-                          fontSize: 25,
-                        ),
-                        textAlign: TextAlign.center,
-                      )),
+                  Text(
+                    'Add Task!',
+                    style: TextStyle(
+                      fontFamily: 'VT323',
+                      color: Colors.white,
+                      fontSize: 25,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ))));
   }
 }
 
-class addTask extends StatelessWidget {
-  const addTask({Key? key}) : super(key: key);
+//class addTask extends StatelessWidget {
+//  const addTask({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+//  @override
+//  Widget build(BuildContext context) {
+//    return Container();
+//  }
+//}
 
 
 enum Priority { ImpUrg, Imp, Urg, Nill }
