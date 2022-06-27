@@ -45,29 +45,15 @@ class _AccountPageState extends State<AccountPage> {
         body: Center(
           heightFactor: 2,
           child: Column(
-            children: [
-              const Text(
+            children: const [
+              Text(
                 'Settings',
                 style: TextStyle(fontFamily: 'Titlefont5',
                     fontSize: 30,
                     fontWeight: FontWeight.normal),
               ),
-              const SizedBox(
-                child: Text(
-                  'Pomodoro Timer',
-                ),
-              ),
-              SizedBox(
-                height: 50,
-                child: Row(
-                  children: [
-                    const Text(
-                      'Pomodoro Length',
-                    ),
-
-                  ],
-                ),
-              )
+              // SizedBox(
+              // )
             ],
           ),
 
