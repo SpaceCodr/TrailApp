@@ -1,8 +1,8 @@
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trailapp/our_screens.dart';
 
 
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+//    User? result = FirebaseAuth.instance.currentUser;
     return MaterialApp(
       title: 'SplashScreen',
       debugShowCheckedModeBanner: false,
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         'welcome':(context) => const WelcomePage(),
         'signup': (context) => const SignupPage(),
         'login': (context) => const LoginPage(),
-        'home': (context) =>const HomePage(),
+        'home': (context) => HomePage(),
         //  'account': (context) => AccountPage(),
         //  'addTask': (context) => TasksAddPage(),
         // 'register': (context) => Register(),
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         splashIconSize: 500,
         backgroundColor: const Color(0xfffaa026),
         splash: 'assets/sand-clock.gif',
-        nextScreen: const WelcomePage(),
+        nextScreen:/* result != null ? HomePage(uid: result.uid) : */const WelcomePage(),
         splashTransition: SplashTransition.rotationTransition,
         duration: 3000,
       ),

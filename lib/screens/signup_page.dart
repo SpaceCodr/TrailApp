@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trailapp/our_components.dart';
+import 'package:trailapp/our_models.dart';
+//import 'package:trailapp/our_models.dart';
 
 String getSignupMessageFromErrorCode() {
   var errorCode;
@@ -54,8 +57,10 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
   String? email;
   String? password;
+
 
   @override
   Widget build(BuildContext context) {
@@ -104,10 +109,16 @@ class _SignupPageState extends State<SignupPage> {
                   title: 'Sign Up',
                   onPressed: () async {
                     try {
-                      final newUser =
-                          await _auth.createUserWithEmailAndPassword(
-                              email: email!, password: password!);
-                      if (newUser != null) {
+                      UserCredential newUser =
+                          await _auth.createUserWithEmailAndPassword(email: email!, password: password!);
+                      User? user = newUser.user;
+                      if (user != null) {
+                        await _db.collection("Users").doc(user.uid).set({
+                          'uid': user.uid,
+                          'email': email,
+                          'pomoSetting': PomoSettings(pomodoroLength: 25, longBreakLength: 15, shortBreakLength: 5, longBreakAfter: 4, autoPomodoro: false, autoBreak: false, disableBreak: false).toMap(),
+                          'ranking': 0
+                        });
                         Navigator.pushNamed(context, 'home');
                       }
                     } catch (error) {

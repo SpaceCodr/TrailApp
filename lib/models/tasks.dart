@@ -1,51 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class Tasks {
-  DocumentReference _document;
-  Tasks(DocumentReference<Map<String, dynamic>> doc):_document = doc;
-  var uuid= const Uuid();
-  List<Task> _innerList = <Task>[];
 
-  int get length {
-    return _innerList.length;
-  }
-
-  List<Task> get list =>_innerList;
-
-  Future<void> update(Task task) async {
-    assert(task != null && task.id != null);
-    add(task);
-  }
-
-  Future<void> add(Task taskToCopy) async {
-    Task task =Task.fromTask(taskToCopy);
-    if (task.id == 'null' || task.id == '' || task.id == null) {
-      String uniqueID = uuid.v1();
-      print('generated unique id: ' + uniqueID);
-      task.id = uniqueID;
-      _innerList.add(task);
-    }
-    else {
-      bool foundMatch = false;
-      for(Task t in _innerList){
-        if(t.id==task.id){
-          foundMatch =true;
-          break;
-        }
-      }
-      if(!foundMatch){
-        _innerList.add(task);
-      }
-    }
-    return _document.set(task,SetOptions(merge: true));
-  }
 
 }
+
+
 class Task {
   String? id;
-  bool selected = false;
+  final bool selected = false;
   String name = 'task name';
   String? description;
   int? noOfPomodoro;
