@@ -1,10 +1,4 @@
 
-class Tasks {
-
-
-}
-
-
 class Task {
   String? id;
   final bool selected = false;
